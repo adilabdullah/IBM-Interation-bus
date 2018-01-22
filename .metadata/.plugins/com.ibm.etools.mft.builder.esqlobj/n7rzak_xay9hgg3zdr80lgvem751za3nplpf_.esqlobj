@@ -1,0 +1,13 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+		declare l int;
+		declare v character;
+		v=InputRoot;
+		set l=length(v);
+		if l>=5 then
+		   return true;
+		else
+		   return false;
+		end if;
+	END;
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://Addition" xmlns:tns="http://Addition">
+      <xsd:element xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" ibmSchExtn:docRoot="true" name="Add">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="val1" nillable="true" type="xsd:int"/>
+                <xsd:element name="val2" nillable="true" type="xsd:int"/>
+            </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" ibmSchExtn:docRoot="true" name="AddResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="res" nillable="true" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    
+      <xsd:simpleType name="NewSimpleType">
+      	<xsd:restriction base="xsd:string"></xsd:restriction>
+      </xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,9 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+		IF Root.XMLNSC.MoneySend.TransactionCode = '1' THEN
+			RETURN TRUE;
+		Else
+			RETURN FALSE;
+		END IF;
+	END;
+

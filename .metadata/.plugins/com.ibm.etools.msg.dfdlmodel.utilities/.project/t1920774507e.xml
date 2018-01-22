@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><MessageBroker name="Addition">
+  <XSDCollection href="platform:/resource/Addition/Addition_InlineSchema1.xsd" prefix="tns" targetNamespace="http://Addition">
+    <element href="platform:/resource/Addition/Addition_InlineSchema1.xsd#//Add;XSDElementDeclaration" name="Add"/>
+    <element href="platform:/resource/Addition/Addition_InlineSchema1.xsd#//AddResponse;XSDElementDeclaration=1" name="AddResponse"/>
+    <simpleType href="platform:/resource/Addition/Addition_InlineSchema1.xsd#//NewSimpleType;XSDSimpleTypeDefinition" name="NewSimpleType" variety="atomic"/>
+  </XSDCollection>
+</MessageBroker>

@@ -1,0 +1,9 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+		IF InputLocalEnvironment.Variables.myVar1='abc' THEN
+		    RETURN FALSE;
+		ELSE
+			RETURN TRUE;
+		END IF;	    
+	END;
+

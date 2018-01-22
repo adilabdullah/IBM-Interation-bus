@@ -1,0 +1,11 @@
+CREATE FILTER MODULE MoneySend_ResponseCheck
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF  Root.XMLNSC.Response.ResponseCode = '00'  THEN
+			RETURN TRUE;
+		ELSEIF Root.XMLNSC.Response.ResponseCode <> '00' AND Environment.Variables.Values.TransactionCode = '1' THEN  
+			RETURN FALSE;
+		END IF;
+	END;
+
+END MODULE;

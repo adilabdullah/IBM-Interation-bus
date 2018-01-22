@@ -1,0 +1,13 @@
+
+
+Importing file: C:\Users\MohammadAzfer\IBM\IIBT10\workspace\testingService2\testingService2.wsdl
+
+The WSDL import will proceed with bindings testingService2HttpBinding.
+Creating wsdl schema document for platform:/resource/testingService2/testingService2.wsdl.
+Parsing wsdl binding {http://testingService2}testingService2HttpBinding.
+Parsing wsdl binding input operation1.
+Parsing wsdl binding output operation1.
+Processing doc style for operation operation1.
+Populating WSDL schema testingService2.xsd.
+Creating file testingService2.xsd in the workspace.
+Copying source WSDL testingService2.wsdl to testingService2.wsdl.

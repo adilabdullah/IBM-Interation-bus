@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><MessageBroker name="IntroLabLib">
+  <XSDCollection href="platform:/resource/IntroLabLib/JKE_IN_Request.xsd" prefix="tns" targetNamespace="http://www.ibm.lab.com">
+    <element href="platform:/resource/IntroLabLib/JKE_IN_Request.xsd#//JKE_In_Request;XSDElementDeclaration" name="JKE_In_Request"/>
+  </XSDCollection>
+</MessageBroker>

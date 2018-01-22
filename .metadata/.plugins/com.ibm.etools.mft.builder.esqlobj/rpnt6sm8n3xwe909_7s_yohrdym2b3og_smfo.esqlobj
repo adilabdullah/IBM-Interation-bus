@@ -1,0 +1,9 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+		IF InputRoot='abc' THEN
+		    RETURN FALSE;
+		ELSE
+			RETURN TRUE;
+		END IF;	    
+	END;
+

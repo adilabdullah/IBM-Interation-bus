@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="RoutingNode" targetNamespace="http://RoutingNode" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://RoutingNode" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="RoutingNodeHttpBinding" originalBindingStyle="document"/>
+        <generatedXSD location="RoutingNode_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    
+        <xsd:schema targetNamespace="http://RoutingNode" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+      <xsd:include schemaLocation="RoutingNode_InlineSchema1.xsd"/>
+    </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="operationRequestMsg">
+    <wsdl:part element="tns:operation" name="operationParameters"/>
+  </wsdl:message>
+    <wsdl:portType name="RoutingNode">
+        <wsdl:operation name="operation">
+      <wsdl:input message="tns:operationRequestMsg" name="operationRequest"/>
+    </wsdl:operation>
+    </wsdl:portType>
+  <wsdl:binding name="RoutingNodeHttpBinding" type="tns:RoutingNode">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="operation">
+      <soap:operation soapAction="http://RoutingNode/operation"/>
+      <wsdl:input name="operationRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    </wsdl:binding>
+  <wsdl:service name="RoutingNodeHttpService">
+    <wsdl:port binding="tns:RoutingNodeHttpBinding" name="RoutingNodeHttpPort">
+      <soap:address location="http://localhost:7800/RoutingNode"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

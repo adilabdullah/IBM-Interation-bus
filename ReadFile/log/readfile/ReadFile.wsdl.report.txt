@@ -1,0 +1,14 @@
+
+
+Importing file: C:\Users\pc\IBM\IIBT10\workspace\ReadFile\ReadFile.wsdl
+
+The WSDL import will proceed with bindings ReadFileHttpBinding.
+Creating wsdl schema document for platform:/resource/ReadFile/ReadFile.wsdl.
+Parsing wsdl binding {http://ReadFile}ReadFileHttpBinding.
+Parsing wsdl binding input Read.
+Parsing wsdl binding output Read.
+Processing doc style for operation Read.
+Populating WSDL schema ReadFile.xsd.
+Creating file ReadFile.xsd in the workspace.
+Creating file ReadFile_InlineSchema1.xsd in the workspace.
+Copying source WSDL ReadFile.wsdl to ReadFile.wsdl.

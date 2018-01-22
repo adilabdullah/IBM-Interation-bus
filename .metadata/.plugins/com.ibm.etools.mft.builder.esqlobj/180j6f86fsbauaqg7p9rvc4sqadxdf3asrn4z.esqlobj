@@ -1,0 +1,13 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+		declare l int;
+		declare v character;
+		set v=Root.XMLNSC.
+		set l=length(v);
+		IF l>=5 THEN
+		   RETURN TRUE;
+		ELSE
+		   RETURN FALSE;
+		END IF;
+	END;
+

@@ -1,0 +1,45 @@
+CREATE COMPUTE MODULE SimpleLog4j_Compute
+	
+
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+CREATEFUNCTIONinitLog4j(INCONFIG_FILE_NAMECHARACTER)
+RETURNSBOOLEAN
+LANGUAGEJAVA
+EXTERNALNAME“com.ibm.broker.IAM3.Log4jNode.initLog4j”;
+CREATEFUNCTIONlog4j_1_1(INCOMPONENT_NAMECHARACTER,
+INLOGGER_NAMECHARACTER,
+INLEVELCHARACTER,
+INTEXTCHARACTER)
+RETURNSBOOLEAN
+LANGUAGEJAVA
+EXTERNALNAME“com.ibm.broker.IAM3.Log4jNode.log”;
+	
+
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DECLARE rc BOOLEAN;
+CALL initLog4j('brokerlog.xml') INTO rc;
+IF ( rc = FALSE ) THEN
+-- error initializing log4j
+END IF;
+		
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

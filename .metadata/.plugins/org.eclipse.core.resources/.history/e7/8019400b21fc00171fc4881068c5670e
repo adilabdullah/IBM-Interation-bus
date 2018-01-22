@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service:services xmlns:service="http://com.ibm.etools.mft.service">
+  <service:service implementation="gen/CalculatorService.msgflow" name="CalculatorService" portType="CalculatorService" wsdlFileName="CalculatorService.wsdl">
+    <service:operations>
+      <service:operation name="operation1" type="request-response">
+        <service:flows/>
+      </service:operation>
+    </service:operations>
+    <service:errors>
+      <service:flows>
+        <service:flow location="gen/CalculatorServiceInputFailureHandler.subflow" type="Failure"/>
+        <service:flow location="gen/CalculatorServiceInputCatchHandler.subflow" type="Catch"/>
+        <service:flow location="gen/CalculatorServiceInputHTTPTimeoutHandler.subflow" type="Timeout"/>
+      </service:flows>
+    </service:errors>
+  </service:service>
+</service:services>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MessagePool xmlns="http://wwww.ibm.com/iib/test/1.0.0">
+    <SOAPInputMessage WSDL_URI="platform:/resource/RoutingNode/RoutingNode.wsdl" WSDL_OPERATION_NAME="operation" WSDL_OPERATION_IN_NAME="operationRequest" timestamp="1516010792689" nodeId="FCMComposite_1_1" name="new message 1" id="1516010792688-426">
+        <plainText>%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3Ctns0%3AEnvelope+xmlns%3Atns0%3D%22http%3A%2F%2Fschemas.xmlsoap.org%2Fsoap%2Fenvelope%2F%22+xmlns%3Atns1%3D%22http%3A%2F%2FRoutingNode%22+xmlns%3Axsi%3D%22http%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema-instance%22%3E%0D%0A++%3Ctns0%3AHeader%2F%3E%0D%0A++%3Ctns0%3ABody%3E%0D%0A++++%3Ctns1%3Aoperation%3E%0D%0A++++++%3Cinput%3Einput%3C%2Finput%3E%0D%0A++++%3C%2Ftns1%3Aoperation%3E%0D%0A++%3C%2Ftns0%3ABody%3E%0D%0A%3C%2Ftns0%3AEnvelope%3E</plainText>
+    </SOAPInputMessage>
+    <SOAPInputMessage WSDL_URI="platform:/resource/RoutingNode/RoutingNode.wsdl" WSDL_OPERATION_NAME="operation" WSDL_OPERATION_IN_NAME="operationRequest" timestamp="1516010800393" nodeId="FCMComposite_1_1" name="new message 2" id="1516010800393-453">
+        <plainText>%3C%3Fxml+version%3D%221.0%22+encoding%3D%22UTF-8%22%3F%3E%3Ctns0%3AEnvelope+xmlns%3Atns0%3D%22http%3A%2F%2Fschemas.xmlsoap.org%2Fsoap%2Fenvelope%2F%22+xmlns%3Atns1%3D%22http%3A%2F%2FRoutingNode%22+xmlns%3Axsi%3D%22http%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema-instance%22%3E%0D%0A++%3Ctns0%3AHeader%2F%3E%0D%0A++%3Ctns0%3ABody%3E%0D%0A++++%3Ctns1%3Aoperation%3E%0D%0A++++++%3Cinput%3Einput%3C%2Finput%3E%0D%0A++++%3C%2Ftns1%3Aoperation%3E%0D%0A++%3C%2Ftns0%3ABody%3E%0D%0A%3C%2Ftns0%3AEnvelope%3E</plainText>
+    </SOAPInputMessage>
+</MessagePool>

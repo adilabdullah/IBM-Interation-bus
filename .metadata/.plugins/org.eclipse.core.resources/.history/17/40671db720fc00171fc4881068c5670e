@@ -1,0 +1,9 @@
+
+
+Importing file: C:\Users\pc\IBM\IIBT10\workspace\CalculatorService\CalculatorService.wsdl
+
+The WSDL import will proceed with bindings CalculatorServiceHttpBinding.
+Creating wsdl schema document for file:///C:/Users/pc/IBM/IIBT10/workspace/CalculatorService/CalculatorService.wsdl.
+Parsing wsdl binding {http://CalculatorService}CalculatorServiceHttpBinding.
+Parsing wsdl binding input operation1.
+Parsing wsdl binding output operation1.

@@ -1,0 +1,52 @@
+CREATE COMPUTE MODULE MoneySend_ReversalResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		
+		IF InputRoot.SOAP.Body.ns49:FTReversalResponse.ns49:FTReversalResult.ResponseCode = '00' THEN
+			SET OutputRoot.XMLNSC.Response.ResponseCode = '91';
+			SET OutputRoot.XMLNSC.Response.ErrorMessage = Environment.Variables.Values.MoneySendErrorMessage || ', FT Reversed';
+		ELSE
+			SET OutputRoot.XMLNSC.Response.ResponseCode = '91';
+			SET OutputRoot.XMLNSC.Response.ErrorMessage = Environment.Variables.Values.MoneySendErrorMessage || ', FT Reversal UnSuccessful';
+		END IF;
+		
+		
+						DECLARE rc BOOLEAN; 
+		declare ch BLOB;
+		declare ch1 CHARACTER;
+	
+		CALL initLog4j('brokerlog.xml') 
+		INTO rc; 
+		IF (  rc = FALSE ) THEN 
+	   	
+		END IF;
+     --     set OutputRoot=InputRoot;		
+	--	set ch=cast(InputRoot as character);
+		          --    set ch=ASBITSTREAM(decodedInputBlob CCSID 1208);
+ -- set ch1=CAST(ch as char CCSID InputRoot.Properties.CodedCharSetId Encoding InputRoot.Properties.Encoding);
+  
+ -- set ch1=CAST(ch as character CCSID InputRoot.Properties.CodedCharSetId);
+  
+ set ch1=CAST(ch as character ccsid 1208);
+  
+CALL log4j_1_1('MoneySend','REVERSALRESPONSE','INFO','Reversal Response Node Test Log') INTO rc;
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

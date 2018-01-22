@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ReadFile" targetNamespace="http://ReadFile" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://ReadFile" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="ReadFileHttpBinding" originalBindingStyle="document"/>
+        <generatedXSD location="ReadFile_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    
+        <xsd:schema targetNamespace="http://ReadFile" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+      <xsd:include schemaLocation="ReadFile_InlineSchema1.xsd"/>
+    </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="ReadRequestMsg">
+    <wsdl:part element="tns:Read" name="ReadParameters"/>
+  </wsdl:message>
+    <wsdl:message name="ReadResponseMsg">
+    <wsdl:part element="tns:ReadResponse" name="ReadResult"/>
+  </wsdl:message>
+    <wsdl:portType name="ReadFile">
+        <wsdl:operation name="Read">
+      <wsdl:input message="tns:ReadRequestMsg" name="ReadRequest"/>
+      <wsdl:output message="tns:ReadResponseMsg" name="ReadResponse"/>
+    </wsdl:operation>
+    </wsdl:portType>
+  <wsdl:binding name="ReadFileHttpBinding" type="tns:ReadFile">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Read">
+      <soap:operation soapAction="http://ReadFile/Read"/>
+      <wsdl:input name="ReadRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ReadResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    </wsdl:binding>
+  <wsdl:service name="ReadFileHttpService">
+    <wsdl:port binding="tns:ReadFileHttpBinding" name="ReadFileHttpPort">
+      <soap:address location="http://localhost:7800/ReadFile"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

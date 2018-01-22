@@ -1,0 +1,186 @@
+CREATE COMPUTE MODULE MoneySend_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		
+		DECLARE position1 INT;          
+		DECLARE position2 INT;
+		DECLARE QRString CHAR '00020101021104155160610000003625204350053035865802PK5917ABID HUSSAIN AWAN6007Karachi62200307101138108055003163040729';
+ 
+		DECLARE QRStringSerialized CHAR '';
+		DECLARE tagValue CHAR;
+		DECLARE len CHAR;
+		DECLARE fieldValue CHAR;   
+		
+		DECLARE inMessage CHARACTER '';
+		SET Environment.Variables.Log.LogMessage = InputRoot.HTTPInputHeader."X-Original-HTTP-Command";
+		SET Environment.Variables.Log.RequestTimestamp= CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'MM-dd-yyyy HH:mm:ss');
+		SET Environment.Variables.Log.ChannelId = InputRoot.HTTPInputHeader."X-Remote-Addr";
+		SET Environment.Variables.Log.Operation = 'MasterCardMoneySend';
+		SET Environment.Variables.Log.Service = 'MoneySendAPI';
+		
+			
+	
+		set inMessage = InputRoot.HTTPInputHeader."X-Original-HTTP-Command"; --='http://192.16.100.56:8081/Wallet-API/services/wallet/PaymentInquiry/'||encoded;
+		DECLARE inputMessage CHAR SUBSTRING(inMessage AFTER 'SOA/Api/Mastercard/MoneySend,');
+		SET inputMessage = SUBSTRING(inputMessage BEFORE ' HTTP');
+		DECLARE decodedInputBlob BLOB BASE64DECODE(inputMessage);
+		DECLARE decodedInputString CHARACTER CAST(decodedInputBlob AS CHARACTER CCSID 1208);
+
+		CALL Split(decodedInputString,Environment.Variables.array,'&&');
+		
+		set QRString = Environment.Variables.Split.QRString1;
+		
+		
+		SET position1 = 1;  
+					
+         		WHILE position1 <= LENGTH(QRString) DO
+            		     
+ 					SET tagValue = SUBSTRING (QRString FROM position1 FOR 2);
+            		SET position1 = position1 + 2;
+            		SET len =  SUBSTRING (QRString FROM position1 FOR 2);
+            		SET position1 = position1 +2;
+            		SET fieldValue = SUBSTRING( QRString FROM position1 FOR CAST(len as INTEGER) ); 
+            		SET position1 = position1 + CAST(len as INTEGER);
+            		
+            		CASE WHEN tagValue = '00' THEN
+            			 	SET  OutputRoot.XMLNSC.MoneySend.PayloadFormatIndicator = fieldValue;
+            			
+            			 WHEN tagValue = '01' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.PointOfInitiationMethod = fieldValue;
+            				
+            			 WHEN tagValue = '04' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.MerchantIdentifierAsDefinedByNetwork = fieldValue;
+            				
+            			 WHEN tagValue = '52' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.MerchantCategoryCode = fieldValue;
+            		 	
+            		 	 WHEN tagValue = '53' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.TransactionCurrencyCode = fieldValue;
+            				
+            			 WHEN tagValue = '54' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.TransactionAmount = CAST((CAST(fieldValue AS INTEGER) * 100) AS CHARACTER);
+            				
+            			 WHEN tagValue = '55' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.TipOrConvenienceIndicator = fieldValue;
+            				
+            			 WHEN tagValue = '56' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.ValueOfConvenienceFeeFixed = fieldValue;
+            				
+            			 WHEN tagValue = '57' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.ValueOfConvenienceFeePercentage = fieldValue;
+            				
+            			 WHEN tagValue = '58' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.CountryCode = fieldValue;
+            				
+            			 WHEN tagValue = '59' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.MerchantName = fieldValue;
+            				
+            			 WHEN tagValue = '60' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.MerchantCity = fieldValue;
+            				
+            			 WHEN tagValue = '61' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.PostalCode = fieldValue;
+            				
+            			 WHEN tagValue = '62' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.AdditionalDataField = fieldValue;
+            				
+            		 	 WHEN tagValue = '63' THEN
+            				SET  OutputRoot.XMLNSC.MoneySend.CRC = fieldValue;
+            				
+            		END CASE; 
+            		
+            		SET QRStringSerialized = QRStringSerialized || tagValue || len || fieldValue;
+            		
+         		END WHILE;
+		
+		SET OutputRoot.XMLNSC.MoneySend.CustomerID = SUBSTRING (Environment.Variables.Split.RetrievalReferenceNumber FROM 1 FOR 13) ; --Environment.Variables.Split.transactionAmount;
+		SET OutputRoot.XMLNSC.MoneySend.fromAccountnumber = Environment.Variables.Split.fromAccountnumber;
+		SET OutputRoot.XMLNSC.MoneySend.TransactionAmount = CAST((CAST(Environment.Variables.Split.transactionAmount AS INTEGER) * 100) AS CHARACTER);
+		SET OutputRoot.XMLNSC.MoneySend.FTAmount = Environment.Variables.Split.transactionAmount;
+		SET OutputRoot.XMLNSC.MoneySend.DebitReference = Environment.Variables.Split.DebitReference;
+		SET OutputRoot.XMLNSC.MoneySend.ChannelId = Environment.Variables.Split.ChannelId;
+		SET OutputRoot.XMLNSC.MoneySend.RetrievalReferenceNumber = Environment.Variables.Split.RetrievalReferenceNumber;
+		SET OutputRoot.XMLNSC.MoneySend.TransactionCode = Environment.Variables.Split.TransactionCode;
+		
+		SET Environment.Variables.Values = OutputRoot.XMLNSC.MoneySend;
+		
+		
+						DECLARE rc BOOLEAN; 
+		declare ch BLOB;
+		declare ch1 CHARACTER;
+	
+		CALL initLog4j('brokerlog.xml') 
+		INTO rc; 
+		IF (  rc = FALSE ) THEN 
+	   	
+		END IF;
+     --     set OutputRoot=InputRoot;		
+	--	set ch=cast(InputRoot as character);
+		                        set ch=ASBITSTREAM(decodedInputBlob CCSID 1208);
+ -- set ch1=CAST(ch as char CCSID InputRoot.Properties.CodedCharSetId Encoding InputRoot.Properties.Encoding);
+  
+ -- set ch1=CAST(ch as character CCSID InputRoot.Properties.CodedCharSetId);
+  
+ set ch1=CAST(ch as character ccsid 1208);
+  
+CALL log4j_1_1('MoneySend','COMPUTE','INFO',ch1) INTO rc;
+		
+		
+		
+		
+		
+		RETURN TRUE;
+	END;
+
+
+
+		CREATE PROCEDURE Split (IN S CHARACTER, IN Env REFERENCE, IN Delim CHARACTER)
+			BEGIN
+				DECLARE P,Q INTEGER;
+				DECLARE Idx INTEGER 1;
+				DECLARE Delim2 CHAR '=';
+				DECLARE key CHAR;
+				DECLARE temp CHAR;
+				SET Env.Split = NULL;
+				
+				REPEAT
+					SET P = POSITION(Delim IN S);
+					IF P = 0 THEN
+						SET Q = POSITION(Delim2 IN S);
+						SET key = LEFT(S,Q-1);
+						SET Env.Split.{key}=RIGHT(S,LENGTH(S)-Q); 
+						--SET Env.Split.Array[Idx] = S;
+					ELSE
+						SET temp= LEFT(S, P - 1);
+						--SET Env.Split.Array[Idx]=temp;
+						SET Q = POSITION(Delim2 IN temp);
+						SET key =LEFT(temp,Q-1);
+						SET Env.Split.{key}=RIGHT(temp,LENGTH(temp)-Q);
+						 
+						SET S = SUBSTRING(S FROM P + LENGTH(Delim));
+						SET Idx = Idx + 1;
+					END IF;
+					UNTIL P = 0
+		
+				END REPEAT;
+		
+			END;
+
+
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

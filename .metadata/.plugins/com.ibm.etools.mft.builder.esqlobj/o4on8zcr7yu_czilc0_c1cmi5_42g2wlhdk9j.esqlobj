@@ -1,0 +1,11 @@
+CREATE FILTER MODULE QueueSoap_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		declare l int;
+		declare v character InputRoot;
+		set l=length(v);
+		IF v
+		RETURN TRUE;
+	END;
+
+END MODULE;

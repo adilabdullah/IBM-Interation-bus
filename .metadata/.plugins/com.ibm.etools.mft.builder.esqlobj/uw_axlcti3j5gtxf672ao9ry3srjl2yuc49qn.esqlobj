@@ -1,0 +1,11 @@
+CREATE FILTER MODULE MoneySend_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF Root.XMLNSC.MoneySend.TransactionCode = '1' THEN
+			RETURN TRUE;
+		Else
+			RETURN FALSE;
+		END IF;
+	END;
+
+END MODULE;

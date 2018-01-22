@@ -1,0 +1,13 @@
+
+
+Importing file: C:\Users\pc\IBM\IIBT10\workspace\Addition\Addition.wsdl
+
+The WSDL import will proceed with bindings AdditionHttpBinding.
+Creating wsdl schema document for platform:/resource/Addition/Addition.wsdl.
+Parsing wsdl binding {http://Addition}AdditionHttpBinding.
+Parsing wsdl binding input Add.
+Parsing wsdl binding output Add.
+Processing doc style for operation Add.
+Populating WSDL schema Addition.xsd.
+Creating file Addition.xsd in the workspace.
+Copying source WSDL Addition.wsdl to Addition.wsdl.

@@ -1,0 +1,59 @@
+CREATE COMPUTE MODULE NamespacePractice_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		DECLARE rc BOOLEAN; 
+		declare ch BLOB;
+		declare ch1 character;
+	
+		CALL initLog4j('brokerlog.xml') 
+		INTO rc; 
+		IF (  rc = FALSE ) THEN 
+	   	
+		END IF;
+          set OutputRoot=InputRoot;		
+	--	set ch=cast(InputRoot as character);
+		    set ch=ASBITSTREAM(InputBody CCSID 1208);
+ -- set ch1=CAST(ch as char CCSID InputRoot.Properties.CodedCharSetId Encoding InputRoot.Properties.Encoding);
+  
+ -- set ch1=CAST(ch as character CCSID InputRoot.Properties.CodedCharSetId);
+  
+ set ch1=CAST(ch as character);
+  
+  
+ --set ch1=PARSE(ch,InputRoot.Properties.Encoding,InputRoot.Properties.CodedCharSetId,'BLOB','XMLNSC'); 
+  
+  		--set ch1=cast(ch as character);
+  
+  
+  
+  -- Starting Code that used for converting blob to character 
+--	 set ch1=CAST(ch as char CCSID 1208 Encoding 815);
+-- For BLOB
+--	DECLARE Value1 CHAR CAST(InputRoot.BLOB.BLOB as char CCSID InputRoot.Properties.CodedCharSetId Encoding InputRoot.Properties.Encoding);
+
+-- For XMLNSC
+--	DECLARE Value1 CHAR CAST(InputBody as char CCSID InputRoot.Properties.CodedCharSetId Encoding InputRoot.Properties.Encoding);
+
+	-- Ending Code that used for converting blob to character 
+		CALL log4j_1_1('NamespacePractice', 'service1','INFO',ch1) INTO rc;
+		
+		
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

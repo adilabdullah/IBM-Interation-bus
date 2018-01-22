@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="gen" version="8.0.5.0" xmlns:map="gen">
+    <input path="mbsharedlib://myLibrary/mydfdl.xsd"/>
+    <output path="/testingService2_InlineSchema1.xsd"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="in2" uri="http://www.example.org/NewXMLSchema"/>
+        <namespace kind="supplement" prefix="in" uri="http://testingService2"/>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="operation1_Request_Response_Mapping">
+        <input path="mb:msg(mydfdl,assembly,DFDL,Properties)" var="MessageAssembly"/>
+        <output namespace="http://testingService2" path="mb:msg(operation1Response,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
+        <function ref="fn:concat">
+            <input path="$MessageAssembly/mydfdl/record/field1" var="field1"/>
+            <input path="$MessageAssembly/mydfdl/record/field2" var="field2"/>
+            <input path="$MessageAssembly/mydfdl/record/field3" var="field3"/>
+            <output path="$MessageAssembly1/operation1Response/output"/>
+            <param name="string1" value="$field1"/>
+            <param name="string2" value="$field2"/>
+            <param name="string3" value="$field3"/>
+        </function>
+    </mappingDeclaration>
+</mappingRoot>

@@ -1,0 +1,31 @@
+CREATE COMPUTE MODULE operation1_Request_Response_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		declare v1 integer
+		declare v2 integer
+		declare res integer
+		set v1=cast(InputRoot.XMLNSC.ns:Add.val1 as integer);
+		set v2=InputRoot.XMLNSC.ns:Add.val2;
+		set res=v1+v2;
+		set OutputRoot.XMLNSC.ns:AddResponse.res=res;
+		
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

@@ -1,0 +1,13 @@
+
+
+CREATE FILTER MODULE FilterNode_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF OutputRoot='abc' THEN
+		    RETURN FALSE;
+		ELSE
+			RETURN TRUE;
+		END IF;	    
+	END;
+
+END MODULE;

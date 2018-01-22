@@ -1,0 +1,17 @@
+
+
+Importing file: C:\Users\pc\IBM\IIBT10\workspace\SimpleSoap\SimpleSoap.wsdl
+
+The WSDL import will proceed with bindings SimpleSoapHttpBinding.
+Creating wsdl schema document for file:///C:/Users/pc/IBM/IIBT10/workspace/SimpleSoap/SimpleSoap.wsdl.
+Parsing wsdl binding {http://SimpleSoap}SimpleSoapHttpBinding.
+Parsing wsdl binding input operation.
+Parsing wsdl binding output operation.
+Processing doc style for operation operation.
+Populating WSDL schema SimpleSoap.xsd.
+Creating file SimpleSoap.xsd in the workspace.
+Creating file /QueueSoap/SimpleSoap_InlineSchema1.xsd in the workspace.
+Copying source WSDL SimpleSoap.wsdl to SimpleSoap.wsdl.
+
+Elapsed time processing this message definition file: 1.178 seconds
+Number of warnings for this message definition file: 0

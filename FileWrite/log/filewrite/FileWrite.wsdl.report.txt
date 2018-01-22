@@ -1,0 +1,13 @@
+
+
+Importing file: C:\Users\pc\IBM\IIBT10\workspace\FileWrite\FileWrite.wsdl
+
+The WSDL import will proceed with bindings FileWriteHttpBinding.
+Creating wsdl schema document for platform:/resource/FileWrite/FileWrite.wsdl.
+Parsing wsdl binding {http://FileWrite}FileWriteHttpBinding.
+Parsing wsdl binding input Writing.
+Parsing wsdl binding output Writing.
+Processing doc style for operation Writing.
+Populating WSDL schema FileWrite.xsd.
+Creating file FileWrite.xsd in the workspace.
+Copying source WSDL FileWrite.wsdl to FileWrite.wsdl.

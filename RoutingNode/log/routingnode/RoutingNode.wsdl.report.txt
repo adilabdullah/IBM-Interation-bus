@@ -1,0 +1,14 @@
+
+
+Importing file: C:\Users\pc\IBM\IIBT10\workspace\RoutingNode\RoutingNode.wsdl
+
+The WSDL import will proceed with bindings RoutingNodeHttpBinding.
+Creating wsdl schema document for platform:/resource/RoutingNode/RoutingNode.wsdl.
+Parsing wsdl binding {http://RoutingNode}RoutingNodeHttpBinding.
+Parsing wsdl binding input operation.
+Parsing wsdl binding output operation.
+Processing doc style for operation operation.
+Populating WSDL schema RoutingNode.xsd.
+Creating file RoutingNode.xsd in the workspace.
+Creating file RoutingNode_InlineSchema1.xsd in the workspace.
+Copying source WSDL RoutingNode.wsdl to RoutingNode.wsdl.

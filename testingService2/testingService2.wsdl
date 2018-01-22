@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="testingService2" targetNamespace="http://testingService2" xmlns:bons1="http://www.example.org/NewXMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://testingService2" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="testingService2HttpBinding" originalBindingStyle="document"/>
+        <generatedXSD location="testingService2_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    
+        <xsd:schema targetNamespace="http://testingService2" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+            <xsd:import namespace="http://www.example.org/NewXMLSchema" schemaLocation="NewXMLSchema.xsd"/>
+            <xsd:import schemaLocation="../myLibrary/myschema.xsd"/>
+            <xsd:include schemaLocation="testingService2_InlineSchema1.xsd"/>
+    </xsd:schema>
+    </wsdl:types>
+  <wsdl:message name="operation1RequestMsg">
+    <wsdl:part element="tns:operation1" name="operation1Parameters"/>
+  </wsdl:message>
+  <wsdl:message name="operation1ResponseMsg">
+    <wsdl:part element="tns:operation1Response" name="operation1Result"/>
+  </wsdl:message>
+  <wsdl:portType name="testingService2">
+    <wsdl:operation name="operation1">
+      <wsdl:input message="tns:operation1RequestMsg" name="operation1Request"/>
+      <wsdl:output message="tns:operation1ResponseMsg" name="operation1Response"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="testingService2HttpBinding" type="tns:testingService2">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="operation1">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="operation1Request">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="operation1Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="testingService2HttpService">
+    <wsdl:port binding="tns:testingService2HttpBinding" name="testingService2HttpPort">
+      <soap:address location="http://localhost:7800/testingService2"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

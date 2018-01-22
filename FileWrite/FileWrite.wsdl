@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="FileWrite" targetNamespace="http://FileWrite" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://FileWrite" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="FileWriteHttpBinding" originalBindingStyle="document"/>
+        <generatedXSD location="FileWrite_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    
+        <xsd:schema targetNamespace="http://FileWrite" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+      <xsd:include schemaLocation="FileWrite_InlineSchema1.xsd"/>
+    </xsd:schema>
+    </wsdl:types>
+  <wsdl:message name="WritingRequestMsg">
+    <wsdl:part element="tns:Writing" name="WritingParameters"/>
+  </wsdl:message>
+  <wsdl:message name="WritingResponseMsg">
+    <wsdl:part element="tns:WritingResponse" name="WritingResult"/>
+  </wsdl:message>
+  <wsdl:portType name="FileWrite">
+    <wsdl:operation name="Writing">
+      <wsdl:input message="tns:WritingRequestMsg" name="WritingRequest"/>
+      <wsdl:output message="tns:WritingResponseMsg" name="WritingResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FileWriteHttpBinding" type="tns:FileWrite">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Writing">
+      <soap:operation soapAction="http://FileWrite/Writing"/>
+      <wsdl:input name="WritingRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="WritingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    </wsdl:binding>
+  <wsdl:service name="FileWriteHttpService">
+    <wsdl:port binding="tns:FileWriteHttpBinding" name="FileWriteHttpPort">
+      <soap:address location="http://localhost:7800/FileWrite"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

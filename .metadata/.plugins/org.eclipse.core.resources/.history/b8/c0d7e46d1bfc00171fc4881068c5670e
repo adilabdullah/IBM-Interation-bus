@@ -1,0 +1,101 @@
+PATH com.ibm.test.log4j;
+
+
+CREATE COMPUTE MODULE MoneySendReversal_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		
+		DECLARE position1 INT;          
+		DECLARE position2 INT;
+		DECLARE QRString CHAR '00020101021104155160610000003625204350053035865802PK5917ABID HUSSAIN AWAN6007Karachi62200307101138108055003163040729';
+ 
+		DECLARE QRStringSerialized CHAR '';
+		DECLARE tagValue CHAR;
+		DECLARE len CHAR;
+		DECLARE fieldValue CHAR;   
+		
+		DECLARE inMessage CHARACTER '';
+		SET Environment.Variables.Log.LogMessage = InputRoot.HTTPInputHeader."X-Original-HTTP-Command";
+		SET Environment.Variables.Log.RequestTimestamp= CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'MM-dd-yyyy HH:mm:ss');
+		SET Environment.Variables.Log.ChannelId = InputRoot.HTTPInputHeader."X-Remote-Addr";
+		SET Environment.Variables.Log.Operation = 'MasterCardMoneySend';
+		SET Environment.Variables.Log.Service = 'MoneySendAPI';
+		
+			
+	
+		set inMessage = InputRoot.HTTPInputHeader."X-Original-HTTP-Command"; --='http://192.16.100.56:8081/Wallet-API/services/wallet/PaymentInquiry/'||encoded;
+		DECLARE inputMessage CHAR SUBSTRING(inMessage AFTER 'SOA/Api/Mastercard/MoneySendReversal,');
+		SET inputMessage = SUBSTRING(inputMessage BEFORE ' HTTP');
+		DECLARE decodedInputBlob BLOB BASE64DECODE(inputMessage);
+		DECLARE decodedInputString CHARACTER CAST(decodedInputBlob AS CHARACTER CCSID 1208);
+
+		CALL Split(decodedInputString,Environment.Variables.array,'&&');
+		
+		
+		
+		
+		
+		SET OutputRoot.XMLNSC.MoneySendReversal.ICA = Environment.Variables.Split.ICA;
+		SET OutputRoot.XMLNSC.MoneySendReversal.TransactionReference = Environment.Variables.Split.TransactionReference;
+		SET OutputRoot.XMLNSC.MoneySendReversal.ReversalReason = Environment.Variables.Split.ReversalReason;
+		
+		
+		--SET Environment.Variables.Values = OutputRoot.XMLNSC.MoneySendReversal;
+		
+		
+		
+		RETURN TRUE;
+	END;
+
+		CREATE PROCEDURE Split (IN S CHARACTER, IN Env REFERENCE, IN Delim CHARACTER)
+			BEGIN
+				DECLARE P,Q INTEGER;
+				DECLARE Idx INTEGER 1;
+				DECLARE Delim2 CHAR '=';
+				DECLARE key CHAR;
+				DECLARE temp CHAR;
+				SET Env.Split = NULL;
+				
+				REPEAT
+					SET P = POSITION(Delim IN S);
+					IF P = 0 THEN
+						SET Q = POSITION(Delim2 IN S);
+						SET key = LEFT(S,Q-1);
+						SET Env.Split.{key}=RIGHT(S,LENGTH(S)-Q); 
+						--SET Env.Split.Array[Idx] = S;
+					ELSE
+						SET temp= LEFT(S, P - 1);
+						--SET Env.Split.Array[Idx]=temp;
+						SET Q = POSITION(Delim2 IN temp);
+						SET key =LEFT(temp,Q-1);
+						SET Env.Split.{key}=RIGHT(temp,LENGTH(temp)-Q);
+						 
+						SET S = SUBSTRING(S FROM P + LENGTH(Delim));
+						SET Idx = Idx + 1;
+					END IF;
+					UNTIL P = 0
+		
+		
+		
+		
+				END REPEAT;
+		
+			END;
+
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

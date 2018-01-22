@@ -1,0 +1,15 @@
+CREATE FILTER MODULE QueueSoap_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		declare l int;
+		declare v character;
+		set v=Root.XMLNSC.ns:operation.value;
+		set l=length(v);
+		IF l>=5 THEN
+		   RETURN TRUE;
+		ELSE
+		   RETURN FALSE;
+		END IF;
+	END;
+
+END MODULE;

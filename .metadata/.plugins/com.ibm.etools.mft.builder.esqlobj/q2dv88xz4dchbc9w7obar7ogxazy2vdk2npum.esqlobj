@@ -1,0 +1,13 @@
+CREATE PROCEDURE Initialize_Log4j()
+ BEGIN
+ DECLARE rc BOOLEAN;
+ IF (SIMPOC_Log4j_Initialized.valid = NULL) THEN
+ CALL initLog4j('brokerlog.xml') INTO rc;
+ IF ( rc = FALSE ) THEN
+ THROW USER EXCEPTION MESSAGE 5560 VALUES ('Error Initializing log4j');
+ END IF;
+ SET SIMPOC_Log4j_Initialized = TRUE;
+ CALL log4j_1_1(SQL.MessageFlowLabel, 'default', 'WARN', 'initLog4j()
+ completed initialization of log4J env.' ) INTO rc;
+ END IF;
+ END;

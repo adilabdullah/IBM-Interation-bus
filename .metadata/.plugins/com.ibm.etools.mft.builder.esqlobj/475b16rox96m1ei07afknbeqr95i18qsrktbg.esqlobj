@@ -1,0 +1,12 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+		
+		DECLARE response CHARACTER Root.SOAP.Body.ns:InitiateTransferResponse.ns:FundsTransferResult.ResponseCode; 
+		
+		IF response = '00' THEN
+			RETURN TRUE;
+		ELSE
+			RETURN FALSE;
+	   END IF;
+	END;
+

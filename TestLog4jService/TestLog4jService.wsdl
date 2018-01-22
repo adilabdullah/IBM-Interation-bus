@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="TestLog4jService" targetNamespace="http://TestLog4jService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://TestLog4jService" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="TestLog4jServiceHttpBinding" originalBindingStyle="document"/>
+        <generatedXSD location="TestLog4jService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    
+        <xsd:schema targetNamespace="http://TestLog4jService" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+      <xsd:include schemaLocation="TestLog4jService_InlineSchema1.xsd"/>
+    </xsd:schema>
+    </wsdl:types>
+  <wsdl:message name="reverseNameRequestMsg">
+    <wsdl:part element="tns:reverseName" name="reverseNameParameters"/>
+  </wsdl:message>
+  <wsdl:message name="reverseNameResponseMsg">
+    <wsdl:part element="tns:reverseNameResponse" name="reverseNameResult"/>
+  </wsdl:message>
+  <wsdl:portType name="TestLog4jService">
+    <wsdl:operation name="reverseName">
+      <wsdl:input message="tns:reverseNameRequestMsg" name="reverseNameRequest"/>
+      <wsdl:output message="tns:reverseNameResponseMsg" name="reverseNameResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TestLog4jServiceHttpBinding" type="tns:TestLog4jService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="reverseName">
+      <soap:operation soapAction="http://TestLog4jService/reverseName"/>
+      <wsdl:input name="reverseNameRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="reverseNameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    </wsdl:binding>
+  <wsdl:service name="TestLog4jServiceHttpService">
+    <wsdl:port binding="tns:TestLog4jServiceHttpBinding" name="TestLog4jServiceHttpPort">
+      <soap:address location="http://localhost:7800/TestLog4jService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,13 @@
+
+
+CREATE FILTER MODULE FilterNode_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF LENGTH(Inputlocal Environment.Variables.myVar1)>=5 THEN
+		    RETURN TRUE;
+		ELSE
+			RETURN FALSE;
+		END IF;	    
+	END;
+
+END MODULE;

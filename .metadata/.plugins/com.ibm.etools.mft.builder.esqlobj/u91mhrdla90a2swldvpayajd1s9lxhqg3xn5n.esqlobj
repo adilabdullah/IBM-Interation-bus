@@ -1,0 +1,9 @@
+/*EATE FUNCTION Main() RETURNS BOOLE*/
+	BEGIN
+		declare l int;
+		declare v character InputRoot;
+		set l=length(v);
+		IF v
+		RETURN TRUE;
+	END;
+

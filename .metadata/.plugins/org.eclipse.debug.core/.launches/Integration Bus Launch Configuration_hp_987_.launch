@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><launchConfiguration type="com.ibm.etools.mft.debug.internal.mbLaunchConfigurationDelegate">
+<stringAttribute key="BRName" value="aa"/>
+<stringAttribute key="ConnectionInfo" value=""/>
+<stringAttribute key="EGName" value="aaa"/>
+<stringAttribute key="com.ibm.debug.wsa.attr_vm_name" value="IBM J9 VM"/>
+<stringAttribute key="com.ibm.debug.wsa.attr_vm_version" value="1.7.0"/>
+<intAttribute key="com.ibm.debug.wsa.attr_was_version" value="61"/>
+<stringAttribute key="com.ibm.etools.mft.debug.attr_hostname" value="hp"/>
+<stringAttribute key="com.ibm.etools.mft.debug.attr_javaportname" value="987"/>
+</launchConfiguration>

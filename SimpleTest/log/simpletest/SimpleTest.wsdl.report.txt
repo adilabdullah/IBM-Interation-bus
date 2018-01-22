@@ -1,0 +1,13 @@
+
+
+Importing file: C:\Users\pc\IBM\IIBT10\workspace\SimpleTest\SimpleTest.wsdl
+
+The WSDL import will proceed with bindings SimpleTestHttpBinding.
+Creating wsdl schema document for platform:/resource/SimpleTest/SimpleTest.wsdl.
+Parsing wsdl binding {http://SimpleTest}SimpleTestHttpBinding.
+Parsing wsdl binding input operation1.
+Parsing wsdl binding output operation1.
+Processing doc style for operation operation1.
+Populating WSDL schema SimpleTest.xsd.
+Creating file SimpleTest.xsd in the workspace.
+Copying source WSDL SimpleTest.wsdl to SimpleTest.wsdl.

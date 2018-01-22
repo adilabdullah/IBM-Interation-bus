@@ -1,0 +1,12 @@
+
+
+Importing file: C:\Users\pc\IBM\IIBT10\workspace\SimpleSoap\SimpleSoap.wsdl
+
+The WSDL import will proceed with bindings SimpleSoapHttpBinding.
+Creating wsdl schema document for file:///C:/Users/pc/IBM/IIBT10/workspace/SimpleSoap/SimpleSoap.wsdl.
+Parsing wsdl binding {http://SimpleSoap}SimpleSoapHttpBinding.
+Parsing wsdl binding input operation1.
+Parsing wsdl binding output operation1.
+Processing doc style for operation operation1.
+Populating WSDL schema SimpleSoap.xsd.
+Creating file SimpleSoap.xsd in the workspace.

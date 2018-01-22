@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/NewXMLSchema" xmlns:tns="http://www.example.org/NewXMLSchema" elementFormDefault="qualified">
+
+    <complexType name="CredentialType">
+    	<sequence>
+    		<element name="uname" type="string"></element>
+    		<element name="pword" type="string"></element>
+    		<element name="more" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="CredentialElement" type="tns:CredentialType"></element>
+
+    <complexType name="userInfoType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="age" type="int"></element>
+    		<element name="dob" type="date"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="UserInfo" type="tns:userInfoType"></element>
+
+    <complexType name="UserAddressType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="Address" type="tns:AddressType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="AddressType">
+    	<sequence>
+    		<element name="houseNo" type="string"></element>
+    		<element name="street" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="UserAddress" type="tns:UserAddressType"></element>
+</schema>

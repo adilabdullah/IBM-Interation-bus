@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy:Policy xmlns:_200702="http://docs.oasis-open.org/ws-rx/wsrmp/200702" xmlns:policy="http://www.w3.org/ns/ws-policy" xmlns:set="http://www.ibm.com/websphere/webservices/wsrmPolicySet">
+  <policy:ExactlyOne>
+    <policy:All>
+      <_200702:RMAssertion>
+        <set:inOrderDelivery>true</set:inOrderDelivery>
+        <set:useMakeConnection>true</set:useMakeConnection>
+        <set:qualityOfService>managedPersistent</set:qualityOfService>
+      </_200702:RMAssertion>
+    </policy:All>
+  </policy:ExactlyOne>
+</policy:Policy>
